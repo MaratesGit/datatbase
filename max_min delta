@@ -1,0 +1,6 @@
+﻿SELECT *
+  FROM alarm
+  where (delta >= (  select max(delta) from alarm where id_fiber =5 and algorithm = 1 and "IndexDelta">100 and "IndexDelta"<1064) or 
+   delta <= ( select min(delta) from alarm where id_fiber =5 and algorithm = 1 and "IndexDelta">100 and "IndexDelta"<1064))
+
+   and id_fiber =5 and algorithm = 1 and "IndexDelta">100 and "IndexDelta"<1064;

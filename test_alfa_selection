@@ -1,0 +1,13 @@
+﻿SELECT
+  alfa
+FROM
+(SELECT
+ROW_NUMBER() OVER () AS id_num, *
+FROM
+alfa_compare v
+WHERE
+v.id_trace = (SELECT id_trace FROM trace m WHERE m.id_fiber = 3)
+ORDER BY v.id_alfa_compare) AS q
+WHERE
+id_num BETWEEN 100 AND 105
+ORDER BY id_num;
