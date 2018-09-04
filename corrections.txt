@@ -1,0 +1,7 @@
+1. Изменить id_trace на id_alarm_trace
+
+2.Добавить в redirect перед всем /index.php в userlogin.php , а также во всех других редиректах
+
+3.изменить ссылки в views/layouts/header.php
+
+
