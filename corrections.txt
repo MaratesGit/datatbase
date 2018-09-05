@@ -4,4 +4,8 @@
 
 3.изменить ссылки в views/layouts/header.php
 
+4.поменять строчку в rules.d  
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE:="0666", GROUP:="users", NAME="ttyUSB"
+
 
