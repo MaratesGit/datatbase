@@ -6,6 +6,8 @@
 
 4.поменять строчку в rules.d  
 
+5. Изменить id_fiber_group на id_fiber, fiber_group_name на fiber_name, from fiber_group на fiber
+
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE:="0666", GROUP:="users", NAME="ttyUSB"
 
 
