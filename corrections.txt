@@ -1,13 +1,45 @@
-1. Изменить id_trace на id_alarm_trace
+Может быть поменять в Reflect.mdl 
 
-2.Добавить в redirect перед всем /index.php в userlogin.php , а также во всех других редиректах
+1. public function getTraceDots($id_trace)
+        {
+            //$this->db->where('id_trace', $id_trace);
+            $this->db->order_by("id");
+            //return $this->db->get('dots')->result_array();
+            return $this->db->get_where("dots", array('id_trace' => $id_trace))->result_array();
+        }
+ на
+  public function getTraceDots($id_trace)
+        {
+            //$this->db->where('id_trace', $id_trace);
+            $this->db->order_by("id_reference_dots");
+            //return $this->db->get('dots')->result_array();
+            return $this->db->get_where("reference_dots", array('id_trace' => $id_trace))->result_array(); // но зачем тогда id_trace
+        }
+2.  public function getTraceDotsById($id_trace)
+        {
+            $this->db->order_by("id");
+            $dots = $this->db->get_where("dots", array('id_fiber'=>$id_trace))->result_array();
+            return $this->serializeReflectogramm($dots);
+        }
+    на
+   
+    public function getTraceDotsById($id_trace)
+        {
+            $this->db->order_by("id_reference_dots");
+            $dots = $this->db->get_where("reference_dots", array('id_fiber'=>$id_trace))->result_array();
+            return $this->serializeReflectogramm($dots);
+        }
 
-3.изменить ссылки в views/layouts/header.php
 
-4.поменять строчку в rules.d  
-
-5. Изменить id_fiber_group на id_fiber, fiber_group_name на fiber_name, from fiber_group на fiber
-
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE:="0666", GROUP:="users", NAME="ttyUSB"
-
-
+3. public function getStandard($id_fiber = 0)
+        {
+            $id_fiber = $id_fiber == 0 ? $this->_id_fiber : $id_fiber;
+            $this->_trace = $this->getStandardTrace($id_fiber);
+            $this->db->order_by("id");
+            return $this->db->get_where('reference_point', array('id_trace' => $this->_trace['id_trace']))->result_array(); // нет такой таблицы
+      
+        }
+        
+  
+     
+     
